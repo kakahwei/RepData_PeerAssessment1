@@ -5,21 +5,49 @@ output:
     keep_md: true
 ---
 
-
 ## Loading and preprocessing the data
-
-
-
+```{r echo=TRUE}
+setwd("E:/myGitFolder/m5_Coursera/RepData_PeerAssessment1")
+activity <- read.csv(file = 'activity.csv' , sep = ',')
+```
 ## What is mean total number of steps taken per day?
+1. Calculate the total number of steps taken per day
+
+```{r echo=TRUE , warning=FALSE}
+activityWithoutNA <- subset(x = activity, !is.na(activity$steps))
+totalNoOfStepsByDate <- aggregate(x =activityWithoutNA$steps, by = list(activityWithoutNA$date), FUN = sum)
+names(totalNoOfStepsByDate)<- c('Activity_Date' , 'Total_Step')
+
+```
+Summary : 
+```{r}
+totalNoOfStepsByDate
+```
 
 
+2. Histogram of the total number of steps taken each day
+
+```{r echo=TRUE , warning=FALSE, message=FALSE}
+library(ggplot2)
+ggplot(totalNoOfStepsByDate, aes(Total_Step)) + geom_histogram(aes(fill = ..count..)) + labs(title= 'Total number of steps taken each day' , x = 'Steps' , y = "Count" ) 
+```
+
+3. Mean and median of the total number of steps taken per day
+
+```{r echo=TRUE , warning=FALSE}
+meanTotalStep <-  mean(totalNoOfStepsByDate$Total_Step)
+medianTotalStep <-  median(totalNoOfStepsByDate$Total_Step)
+```
+
+Mean of the total number of steps taken per day : `r meanTotalStep`
+
+Median of the total number of steps taken per day : `r medianTotalStep`
 
 ## What is the average daily activity pattern?
 
 
 
 ## Imputing missing values
-
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
