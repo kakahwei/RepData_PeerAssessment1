@@ -11,7 +11,7 @@ library("knitr")
 ```
 
 ```r
-opts_chunk$set(echo=TRUE , warning=FALSE, message=FALSE)
+opts_chunk$set(echo=TRUE , warning=FALSE, message=FALSE )
 
 setwd("E:/myGitFolder/m5_Coursera/RepData_PeerAssessment1")
 activityDs <- read.csv(file = 'activity.csv' , sep = ',' , colClasses = c("integer", "Date", "integer"))
@@ -86,6 +86,12 @@ maxInterval <- avgIntervalStep[ which.max(avgIntervalStep$steps),]
 ## Imputing missing values
 
 1. Calculate and report the total number of missing values in the dataset
+
+
+```r
+sumOfNA <- sum(is.na(activityDs$steps))
+```
+
 *Total number of missing values in the dataset : 2304*
 
 2. Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
@@ -115,7 +121,7 @@ totalNoOfStepsByDateForNewActivity <- aggregate(steps~ date , data =  newActivit
 ggplot(totalNoOfStepsByDateForNewActivity, aes(steps)) + geom_histogram(aes(fill = ..count..)) + labs(title= 'Total number of steps taken each day with Imputing missing values' , x = 'Steps' , y = "Count" ) 
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-9-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-10-1.png) 
 
 
 ```r
@@ -165,4 +171,5 @@ xyplot(steps ~ interval | type , data = avgIntervalStepNew, type = "l", xlab = "
     ylab = "Number of steps", layout = c(1, 2))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-12-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-13-1.png) 
+

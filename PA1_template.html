@@ -68,7 +68,7 @@ img {
 <h2>Loading and preprocessing the data</h2>
 <pre class="r"><code>library(&quot;knitr&quot;)</code></pre>
 <pre><code>## Warning: package 'knitr' was built under R version 3.2.2</code></pre>
-<pre class="r"><code>opts_chunk$set(echo=TRUE , warning=FALSE, message=FALSE)
+<pre class="r"><code>opts_chunk$set(echo=TRUE , warning=FALSE, message=FALSE )
 
 setwd(&quot;E:/myGitFolder/m5_Coursera/RepData_PeerAssessment1&quot;)
 activityDs &lt;- read.csv(file = 'activity.csv' , sep = ',' , colClasses = c(&quot;integer&quot;, &quot;Date&quot;, &quot;integer&quot;))</code></pre>
@@ -120,8 +120,12 @@ plot(avgIntervalStep$interval , avgIntervalStep$steps , type = 'l', main=&quot;T
 <div id="imputing-missing-values" class="section level2">
 <h2>Imputing missing values</h2>
 <ol style="list-style-type: decimal">
-<li><p>Calculate and report the total number of missing values in the dataset <em>Total number of missing values in the dataset : 2304</em></p></li>
-<li><p>Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.</p></li>
+<li>Calculate and report the total number of missing values in the dataset</li>
+</ol>
+<pre class="r"><code>sumOfNA &lt;- sum(is.na(activityDs$steps))</code></pre>
+<p><em>Total number of missing values in the dataset : 2304</em></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.</li>
 </ol>
 <p><em>Uses mean steps value store in “avgIntervalStep” to replace the NA steps in dataset based on the interval value</em></p>
 <ol start="3" style="list-style-type: decimal">

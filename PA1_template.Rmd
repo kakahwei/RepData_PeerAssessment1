@@ -8,7 +8,7 @@ output:
 ## Loading and preprocessing the data
 ```{r}
 library("knitr")
-opts_chunk$set(echo=TRUE , warning=FALSE, message=FALSE)
+opts_chunk$set(echo=TRUE , warning=FALSE, message=FALSE )
 
 setwd("E:/myGitFolder/m5_Coursera/RepData_PeerAssessment1")
 activityDs <- read.csv(file = 'activity.csv' , sep = ',' , colClasses = c("integer", "Date", "integer"))
@@ -64,7 +64,12 @@ maxInterval <- avgIntervalStep[ which.max(avgIntervalStep$steps),]
 ## Imputing missing values
 
 1. Calculate and report the total number of missing values in the dataset
-*Total number of missing values in the dataset : `r sum(is.na(activityDs$steps))`*
+
+```{r}
+sumOfNA <- sum(is.na(activityDs$steps))
+```
+
+*Total number of missing values in the dataset : `r sumOfNA`*
 
 2. Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
 
@@ -125,3 +130,4 @@ library(lattice)
 xyplot(steps ~ interval | type , data = avgIntervalStepNew, type = "l", xlab = "Interval", 
     ylab = "Number of steps", layout = c(1, 2))
 ```
+
