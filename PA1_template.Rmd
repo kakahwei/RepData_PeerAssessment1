@@ -6,12 +6,21 @@ output:
 ---
 
 ## Loading and preprocessing the data
-```{r}
+```{r warning=FALSE}
 library("knitr")
 opts_chunk$set(echo=TRUE , warning=FALSE, message=FALSE )
 
-setwd("E:/myGitFolder/m5_Coursera/RepData_PeerAssessment1")
-activityDs <- read.csv(file = 'activity.csv' , sep = ',' , colClasses = c("integer", "Date", "integer"))
+temp <- tempfile()
+setInternet2(use = TRUE)
+download.file(url = "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip", destfile = temp, mode ="wb" )
+activityDs <-  read.csv(file = unz(temp , "activity.csv"), sep = ',' , colClasses = c("integer", "Date", "integer"))
+unlink(temp)
+
+## The code above run well in window 8 , if you encounter any error , you may download the zip file manually  , enable the code below (remove ##) , set the working directory to the .zip file location and set the activityDs.
+
+##setwd("E:/myGitFolder/m5_Coursera/RepData_PeerAssessment1")
+##activityDs <- read.csv(file = 'activity.csv' , sep = ',' , colClasses = c("integer", "Date", "integer"))
+
 ```
 
 ## What is mean total number of steps taken per day?

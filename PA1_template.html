@@ -66,12 +66,19 @@ img {
 
 <div id="loading-and-preprocessing-the-data" class="section level2">
 <h2>Loading and preprocessing the data</h2>
-<pre class="r"><code>library(&quot;knitr&quot;)</code></pre>
-<pre><code>## Warning: package 'knitr' was built under R version 3.2.2</code></pre>
-<pre class="r"><code>opts_chunk$set(echo=TRUE , warning=FALSE, message=FALSE )
+<pre class="r"><code>library(&quot;knitr&quot;)
+opts_chunk$set(echo=TRUE , warning=FALSE, message=FALSE )
 
-setwd(&quot;E:/myGitFolder/m5_Coursera/RepData_PeerAssessment1&quot;)
-activityDs &lt;- read.csv(file = 'activity.csv' , sep = ',' , colClasses = c(&quot;integer&quot;, &quot;Date&quot;, &quot;integer&quot;))</code></pre>
+temp &lt;- tempfile()
+setInternet2(use = TRUE)
+download.file(url = &quot;https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip&quot;, destfile = temp, mode =&quot;wb&quot; )
+activityDs &lt;-  read.csv(file = unz(temp , &quot;activity.csv&quot;), sep = ',' , colClasses = c(&quot;integer&quot;, &quot;Date&quot;, &quot;integer&quot;))
+unlink(temp)
+
+## The above code run well in window 8 , if you encounter error , you may download the zip file manually  , enable the code below , set the working directory according to the .zip file location and set the setInternet2.
+
+##setwd(&quot;E:/myGitFolder/m5_Coursera/RepData_PeerAssessment1&quot;)
+##activityDs &lt;- read.csv(file = 'activity.csv' , sep = ',' , colClasses = c(&quot;integer&quot;, &quot;Date&quot;, &quot;integer&quot;))</code></pre>
 </div>
 <div id="what-is-mean-total-number-of-steps-taken-per-day" class="section level2">
 <h2>What is mean total number of steps taken per day?</h2>
